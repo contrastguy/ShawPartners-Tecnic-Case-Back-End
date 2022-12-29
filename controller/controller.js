@@ -1,6 +1,8 @@
 const axios = require("axios");
 const express = require("express");
 const octokit = require("octokit");
+require('dotenv').config()
+
 
 const app = express();
 
@@ -14,12 +16,14 @@ const home = app.get("/" ,(req,res)=>{
 const tool = new octokit.Octokit({auth: process.env.TOKEN });
 
 //detalhes usuário
-const userDetails = async function getUserDetails(username) {
+async function getUserDetails(){
     try {
-      const user = await tool.request('GET /users/{username}/hovercard{?subject_type,subject_id}',{
-        username: username
+      const user = await tool.request('GET /users/{username}/hovercard',{
+        username:"torvalds",
+        subject_type: "repository",
+        subject_id:2325298,
       })
-      console.log(user.data);
+      return user.data;
     } catch (error) {
       console.error(error);
     }
@@ -29,12 +33,12 @@ const userDetails = async function getUserDetails(username) {
 
 
 
-const  useRepos  = async function getUserRepos(username) {
+  async function getUseRepos(){
     try {
       const user = await tool.request('GET /users/{username}/repos',{
-        username: username
+        username: "contrastguy"
       })
-      console.log(user.data);
+      return user.data;
     } catch (error) {
       console.error(error);
     }
@@ -43,23 +47,26 @@ const  useRepos  = async function getUserRepos(username) {
  
 
 
-  const userList = app.get("/api/users", (req, res) => {
-    const since = req.query.since || 0;
-  
-    axios
-      .get(`https://api.github.com/users?since=${since}`)
-      .then((response) => {
-        const users = response.data;
-        const nextPageLink = response.headers.link;
-  
-        res.json({ users, nextPageLink });
-      })
-      .catch((error) => {
-        console.error(error);
-        res.status(500);
-      });
-  });
+  async function getUsersList() {
+    try {
+      const list = await tool.request('GET /users', {since:1,per_page:1})
+      return list.data
+  }catch (error){
+    console.error(error);
+  }
 
+  }
+
+  const userList  = getUsersList()
+
+  const useRepos =  getUseRepos()
+
+
+  const userDetails = getUserDetails()
+
+
+  
+ 
   module.exports = {
     userList,
     useRepos,
