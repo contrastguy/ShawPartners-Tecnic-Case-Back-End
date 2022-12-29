@@ -6,7 +6,7 @@ const module = require("./config");
 
 app.use(express.json());
 
-app.use(cors(module))
+app.use(cors(module.headers))
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
