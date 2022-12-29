@@ -5,11 +5,7 @@ const octokit = require("octokit");
 const app = express();
 
 
-
-
-
-
-const usersList = app.get("/api/users", (req, res) => {
+const userList = app.get("/api/users", (req, res) => {
     const since = req.query.since || 0;
   
     axios
@@ -25,3 +21,5 @@ const usersList = app.get("/api/users", (req, res) => {
         res.status(500);
       });
   });
+
+return userList;

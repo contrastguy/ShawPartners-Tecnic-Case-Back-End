@@ -18,3 +18,5 @@ async function getUserDetails(username) {
       console.error(error);
     }
   }
+
+  getUserDetails("contrastguy")
