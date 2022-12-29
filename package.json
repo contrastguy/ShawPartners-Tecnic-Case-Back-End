@@ -2,6 +2,7 @@
   "name": "shawpartners-case-tecnico-back-end",
   "version": "1.0.0",
   "description": "",
+  "proxy" : "localhost:3000/",
   "main": "Services/api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
