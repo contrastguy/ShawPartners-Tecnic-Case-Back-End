@@ -4,6 +4,14 @@ const octokit = require("octokit");
 
 const app = express();
 
+
+
+
+const home = app.get("/" ,(req,res)=>{
+  res.send({Message:"Hello World"});
+});
+
+
 //users list with parameter
 // Essa endpoint vai funcionar, porque não precisa de autenticação
 
@@ -30,7 +38,7 @@ const tool = new octokit.Octokit({auth: process.env.TOKEN });
 //detalhes usuário
 async function getUserDetails(username) {
   try {
-    const user = await tool.request('GET /users/{username}/details',{
+    const user = await tool.request('GET /users/{username}/hovercard{?subject_type,subject_id}',{
       username: username
     })
     console.log(user.data);
@@ -52,9 +60,7 @@ async function getUserRepos(username) {
   }
 }
 
-//status : OK
-getUserDetails("contrastguy")
-getUserRepos("contrastguy")
+
 
 
 // Normalmente, enviamos um erro 404 quando o cliente não está autenticado corretamente.
