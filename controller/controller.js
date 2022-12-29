@@ -49,7 +49,7 @@ async function getUserDetails(){
 
   async function getUsersList() {
     try {
-      const list = await tool.request('GET /users', {since:15,per_page:5})
+      const list = await tool.request('GET /users', {since:1,per_page:20})
       return list.data
   }catch (error){
     console.error(error);
