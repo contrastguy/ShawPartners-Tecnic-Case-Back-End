@@ -3,7 +3,9 @@ const express = require("express");
 const Router = express.Router();
 
 
-Router.get("/", controller.home)
+Router.get("/", function(req, res, next) {
+    res.send("Hello World");
+})
 
 
 Router.get ("/users/:username/repos", function(req, res){
