@@ -19,7 +19,7 @@ const tool = new octokit.Octokit({auth: process.env.TOKEN });
 async function getUserDetails(){
     try {
       const user = await tool.request('GET /users/{username}',{
-        username: localStorage.getItem("LOGIN")
+        username:"contrastguy"
       })
       return user.data;
     } catch (error) {
@@ -34,7 +34,7 @@ async function getUserDetails(){
   async function getUseRepos(){
     try {
       const user = await tool.request('GET /users/{username}/repos',{
-        username: localStorage.getItem("LOGIN")
+        username: "contrastguy"
       })
       return user.data;
     } catch (error) {
