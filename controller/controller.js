@@ -18,7 +18,7 @@ const tool = new octokit.Octokit({auth: process.env.TOKEN });
 //detalhes usuário
 async function getUserDetails(){
     try {
-      const user = await axios.get(`https://api.github.com/users?username=${localStorage.getItem("LOGIN")}`);
+      const user = await axios.get(`https://api.github.com/users/${localStorage.getItem("LOGIN")}`);
       return user.data;
     } catch (error) {
       console.error(error);
