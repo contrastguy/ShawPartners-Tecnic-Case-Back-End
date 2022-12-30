@@ -19,7 +19,6 @@ const tool = new octokit.Octokit({auth: process.env.TOKEN });
 async function getUserDetails(){
     try {
       const user = await tool.request('GET /users/{username}',{
-        username:"torvalds"
       })
       return user.data;
     } catch (error) {
