@@ -1,4 +1,4 @@
-const axios = require("axios").default();
+const axios = require("axios");
 const express = require("express");
 const octokit = require("octokit");
 require('dotenv').config()
@@ -18,7 +18,10 @@ const tool = new octokit.Octokit({auth: process.env.TOKEN });
 //detalhes usuário
 async function getUserDetails(){
     try {
-      const user = await axios.get(`https://api.github.com/users/${localStorage.getItem("LOGIN")}`);
+      const user = await tool.request('GET /users/{username}',{
+        username: localStorage.getItem("LOGIN"),
+        auth: process.env.TOKEN
+      })
       return user.data;
     } catch (error) {
       console.error(error);
