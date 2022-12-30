@@ -15,7 +15,7 @@ Router.get ("/users/:username/repos", function(req, res){
         res.send(result)})
 })
 
-Router.get ("/users/:username/hovercard", function(req, res){
+Router.get ("/users/:username", function(req, res){
     controller.userDetails.then((result)=>{
     res.header("Access-Control-Allow-Origin", "*")
     res.send(result)})

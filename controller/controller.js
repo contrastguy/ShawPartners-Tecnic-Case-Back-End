@@ -18,7 +18,7 @@ const tool = new octokit.Octokit({auth: process.env.TOKEN });
 //detalhes usuário
 async function getUserDetails(){
     try {
-      const user = await tool.request('GET /users/{username}/hovercard',{
+      const user = await tool.request('GET /users/{username}',{
         username:"torvalds",
         subject_type: "repository",
         subject_id:2325298,
