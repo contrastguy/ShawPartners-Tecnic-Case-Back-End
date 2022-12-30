@@ -1,4 +1,4 @@
-const axios = require("axios");
+const axios = require("axios").default();
 const express = require("express");
 const octokit = require("octokit");
 require('dotenv').config()
@@ -18,9 +18,7 @@ const tool = new octokit.Octokit({auth: process.env.TOKEN });
 //detalhes usuário
 async function getUserDetails(){
     try {
-      const user = await tool.request('GET /users/{username}',{
-        username: localStorage.getItem("LOGIN"),
-      })
+      const user = await axios.get(`https://api.github.com/users?username=${localStorage.getItem("LOGIN")}`);
       return user.data;
     } catch (error) {
       console.error(error);
@@ -34,7 +32,7 @@ async function getUserDetails(){
   async function getUseRepos(){
     try {
       const user = await tool.request('GET /users/{username}/repos',{
-        username: "contrastguy"
+        username: localStorage.getItem("LOGIN")
       })
       return user.data;
     } catch (error) {
