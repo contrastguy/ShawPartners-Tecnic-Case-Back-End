@@ -16,12 +16,17 @@ const home = app.get("/" ,(req,res)=>{
 const tool = new octokit.Octokit({auth: process.env.TOKEN });
 
 //detalhes usuário
-async function getUserDetails(){
+async function getUserDetails(req, res){
     try {
-      const user = await tool.request('GET /users/{username}',{
-        username:"contrastguy"
-      })
-      return user.data;
+      // const user = await tool.request('GET /users/{username}',{
+      //   username:"contrastguy"
+      // })
+      const {name} = req.params;
+
+      await axios.get("https://api.github.com/users/" + name )
+      .then(function(response){
+        response.send(response.data);
+      }) 
     } catch (error) {
       console.error(error);
     }
@@ -47,7 +52,7 @@ async function getUserDetails(){
 
   async function getUsersList() {
     try {
-      const list = await tool.request('GET /users', {since:1,per_page:20})
+      const list = await tool.paginate('GET /users', {since:1,per_page:20})
       return list.data
   }catch (error){
     console.error(error);
