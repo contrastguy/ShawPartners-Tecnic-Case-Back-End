@@ -38,7 +38,7 @@ async function getUserDetails(req, res){
 
   async function getUseRepos(){
     try {
-      const user = await tool.request('GET /users/{username}/repos',{
+      const user = await tool.paginate('GET /users/{username}/repos',{
         username: "contrastguy"
       })
       return user.data;
