@@ -50,9 +50,9 @@ async function getUserDetails(req, res){
  
 
 
-  async function getUsersList() {
+  async function getUsersList(offset,limit) {
     try {
-      const list = await tool.request('GET /users', {since:1,per_page:20})
+      const list = await tool.request('GET /users', {since:1,per_page:localStorage.getItem("NUMBER"),offset,limit})
       return list.data
   }catch (error){
     console.error(error);
